@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="grid.css" rel="stylesheet">
+</head>
+
+<body style="padding: 0px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-6" style="font-size: 24px; background-color: #fff; border: 0px solid #fff;">
+        <table style="width: 100%; text-align: left; ">
+          <tbody>
+            <tr height="140px" style=" text-align: left;border: 1px solid #000;">
+              <td style=" text-align: left;">Calculator <br><br> M-Sure Product</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="col-6" style="text-align: right; background-color: #fff; border: 0px solid #fff;">
+        <table>
+          <tbody>
+            <tr height="140px" style="border: 1px solid #000;">
+              <td><img width="100px" height="100px" src="logo.PNG"></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+    </div>
+    <div class="row" style="margin-top: 0rem;">
+      <div class="col-md-8" style=" padding-top: 0rem; padding-bottom: 0rem; ">
+        <div class="row" style="padding-top: 0rem; padding-bottom: 0rem;     margin-top: 0rem;">
+          <div class="col-md-6" style="text-align: right">Average number of cars</div>
+          <div class="col-md-6"><input type="number" placeholder="Average number of cars" id="cars" name="cars"
+              style="width: 100%; background-color: #fff; border: 1px solid #000; padding: 2px;" /></div>
+          <div class="col-md-6" style="text-align: right">Average value of cars</div>
+          <div class="col-md-6"><input type="number" placeholder="Average value of cars" id="values" name="values"
+              style="width: 100%; background-color: #fff; border: 1px solid #000; padding: 2px;" /></div>
+          <div class="col-md-6" style="text-align: right">Average kilometer reading</div>
+          <div class="col-md-6"><input type="number" placeholder="Average kilometer reading" id="km" name="km"
+              style="width: 100%; background-color: #fff; border: 1px solid #000; padding: 2px;" /></div>
+          <div class="col-md-6" style="text-align: right">Average car age</div>
+          <div class="col-md-6"><input type="number" placeholder="Average car age" id="age" name="age"
+              style="width: 100%; background-color: #fff; border: 1px solid #000; padding: 2px;" /></div>
+        </div>
+      </div>
+      <div class="col-md-4" style="vertical-align: text-bottom;">
+        <button onclick="myFunction()">Calculate</button></div>
+    </div>
+    <table>
+      <thead>
+        <tr style="border: 1px solid #000; background-color: #E5E5E5; text-align: center">
+          <th scope="col" style="border: 1px solid #000; width: 7%"></th>
+          <th scope="col" style="border: 1px solid #000;">Product</th>
+          <th scope="col" style="border: 1px solid #000; width: 14%">Monthly</th>
+          <th scope="col" style="border: 1px solid #000; width: 14%">Annually</th>
+          <th scope="col" style="border: 1px solid #000;">Indicator %</th>
+          <th scope="col" style="border: 1px solid #000;">Indicator Range</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border: 1px solid #000;"><label class="containerCheck">
+              <input type="checkbox" id="chkWarranties" onclick="checkWarranties()" checked="checked">
+              <span class="checkmark"></span>
+            </label></td>
+          <td data-label="Product" style="border: 1px solid #000;">Warranties</td>
+          <td data-label="Monthly" style="border: 1px solid #000;">R<label id="warrantyMonthlyOutput">0.00</label></td>
+          <td data-label="Annually" style="border: 1px solid #000;">R<label id="warrantyAnnuallyOutput">0.00</label>
+          </td>
+          <td data-label="Indicator %" style="border: 1px solid #000;">Burn Rate</td>
+          <td data-label="Indicator Range" style="border: 1px solid #000;">
+            <table width="100%">
+              <tr>
+                <td width="80%">
+                  <div class="slidecontainer">
+                    <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
+
+                  </div>
+                </td>
+                <td width="20%"><span id="demo" value="0"></span>%</td>
+              </tr>
+            </table>
+
+
+
+
+          </td>
+        </tr>
+        <tr>
+          <td scope="row" style="border: 1px solid #000;"><label class="containerCheck">
+              <input type="checkbox" id="chkShortfall" onclick="checkShortfall()" checked="checked">
+              <span class="checkmark"></span>
+            </label></td>
+          <td data-label="Product" style="border: 1px solid #000;">Credit Shortfall</td>
+          <td data-label="Monthly" style="border: 1px solid #000;">R<label id="shortfallMonthlyOutput">0.00</label></td>
+          <td data-label="Annually" style="border: 1px solid #000;">R<label id="shortfallAnnuallyOutput">0.00</label>
+          </td>
+          <td data-label="Indicator %" style="border: 1px solid #000;">Expected annual product sales</td>
+          <td data-label="Indicator Range" style="border: 1px solid #000;">
+            <table width="100%">
+              <tr>
+                <td width="80%">
+                  <div class="slidecontainer">
+                    <input type="range" min="0" max="100" value="0" class="slider" id="shortfall">
+
+                  </div>
+                </td>
+                <td width="20%"><span id="short"></span>%</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td scope="row" style="border: 1px solid #000;"><label class="containerCheck">
+              <input type="checkbox" id="chkCredit" onclick="checkCredit()" checked="checked">
+              <span class="checkmark"></span>
+            </label></td>
+          <td data-label="Product" style="border: 1px solid #000;">Credit Risk</td>
+          <td data-label="Monthly" style="border: 1px solid #000;">R<label id="LifeMonthlyOutput">0.00</label></td>
+          <td data-label="Annually" style="border: 1px solid #000;">R<label id="LifeAnnuallyOutput">0.00</label></td>
+          <td data-label="Indicator %" style="border: 1px solid #000;">Expected annual product sales</td>
+          <td data-label="Indicator Range" style="border: 1px solid #000;">
+            <table width="100%">
+              <tr>
+                <td width="80%">
+                  <div class="slidecontainer">
+                    <input type="range" min="0" max="100" value="0" class="slider" id="life">
+
+                  </div>
+                </td>
+                <td width="20%"><span id="short1"></span>%</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td scope="row" style="border: 1px solid #000;"><label class="containerCheck">
+              <input type="checkbox" id="chkDents" onclick="checkDents()" checked="checked">
+              <span class="checkmark"></span>
+            </label></td>
+          <td data-label="Product" style="border: 1px solid #000;">Dents and Scratches</td>
+          <td data-label="Monthly" style="border: 1px solid #000;">R<label id="dentsMonthlyOutput">0.00</label></td>
+          <td data-label="Annually" style="border: 1px solid #000;">R<label id="dentsAnnuallyOutput">0.00</label></td>
+          <td data-label="Indicator %" style="border: 1px solid #000;">Expected annual product sales</td>
+          <td data-label="Indicator Range" style="border: 1px solid #000;">
+            <table width="100%">
+              <tr>
+                <td width="80%">
+                  <div class="slidecontainer">
+                    <input type="range" min="0" max="100" value="0" class="slider" id="dent">
+
+                  </div>
+                </td>
+                <td width="20%"><span id="short2"></span>%</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td scope="row" style="border: 1px solid #000;"><label class="containerCheck">
+              <input type="checkbox" id="chkvaps" onclick="checkvaps()" checked="checked">
+              <span class="checkmark"></span>
+            </label></td>
+          <td data-label="Product" style="border: 1px solid #000;">2nd Phase VAPS Sales</td>
+          <td data-label="Monthly" style="border: 1px solid #000;">R<label id="vapsMonthlyOutput">0.00</label></td>
+          <td data-label="Annually" style="border: 1px solid #000;">R<label id="vapsAnnuallyOutput">0.00</label></td>
+          <td data-label="Indicator %" style="border: 1px solid #000;">Expected annual product sales</td>
+          <td data-label="Indicator Range" style="border: 1px solid #000;">
+            <table width="100%">
+              <tr>
+                <td width="80%">
+                  <div class="slidecontainer">
+                    <input type="range" min="0" max="100" value="0" class="slider" id="vaps">
+
+                  </div>
+                </td>
+                <td width="20%"><span id="short3"></span>%</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td scope="row" style="border: 1px solid #000;"><label class="containerCheck">
+              <input type="checkbox" id="chkTelesure" onclick="checkTelesure()" checked="checked">
+              <span class="checkmark"></span>
+            </label></td>
+          <td data-label="Product" style="border: 1px solid #000;">Telesure Leads</td>
+          <td data-label="Monthly" style="border: 1px solid #000;">R<label id="telesureMonthlyOutput">0.00</label></td>
+          <td data-label="Annually" style="border: 1px solid #000;">R<label id="telesureAnnuallyOutput">0.00</label>
+          </td>
+          <td data-label="Indicator %" style="border: 1px solid #000;">Expected annual product sales</td>
+          <td data-label="Indicator Range" style="border: 1px solid #000;">
+            <table width="100%">
+              <tr>
+                <td width="80%">
+                  <div class="slidecontainer">
+                    <input type="range" min="0" max="100" value="0" class="slider" id="telesure">
+
+                  </div>
+                </td>
+                <td width="20%"><span id="short4"></span>%</td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+        <tr>
+          <td data-label="Product" colspan="2" style="border: 1px solid #000;">Total Revenue</td>
+          <td data-label="Monthly" style="border: 1px solid #000;" style="font-weight: bold;">R<label
+              id="warrantyTotalMonthlyOutput">0.00</label></td>
+          <td data-label="Annually" style="border: 1px solid #000;" style="font-weight: bold;">R<label
+              id="warrantyTotalAnnuallyOutput">0.00</label></td>
+          <td data-label="Indicator %" style="border: 1px solid #000;">&nbsp;</td>
+          <td data-label="Indicator Range" style="border: 1px solid #000;">&nbsp;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div> <!-- /container -->
+
+  <script>
+
+    // get value from ther range
+    var slider = document.getElementById("myRange");
+    var slider1 = document.getElementById("shortfall");
+    var slider2 = document.getElementById("life");
+    var slider3 = document.getElementById("dent");
+    var slider4 = document.getElementById("vaps");
+    var slider5 = document.getElementById("telesure");
+
+    //warranty monthly and annually
+    var warrantyMonthlyOutput = document.getElementById("warrantyMonthlyOutput");
+    var warrantyAnnuallyOutput = document.getElementById("warrantyAnnuallyOutput");
+
+    //shortfall monthly and annually
+    var shortfallMonthlyOutput = document.getElementById("shortfallMonthlyOutput");
+    var shortfallAnnuallyOutput = document.getElementById("shortfallAnnuallyOutput");
+
+    //credit life monthly and annually
+    var LifeMonthlyOutput = document.getElementById("LifeMonthlyOutput");
+    var LifeAnnuallyOutput = document.getElementById("LifeAnnuallyOutput");
+
+    //dents&scretches monthly and annually
+    var dentsMonthlyOutput = document.getElementById("dentsMonthlyOutput");
+    var dentsAnnuallyOutput = document.getElementById("dentsAnnuallyOutput");
+
+    //vaps monthly and annually
+    var vapsMonthlyOutput = document.getElementById("vapsMonthlyOutput");
+    var vapsAnnuallyOutput = document.getElementById("vapsAnnuallyOutput");
+
+    //telesure monthly and annually
+    var telesureMonthlyOutput = document.getElementById("telesureMonthlyOutput");
+    var telesureAnnuallyOutput = document.getElementById("telesureAnnuallyOutput");
+
+    // Total Revenue output
+    var warrantyTotalMonthlyOutput = document.getElementById("warrantyTotalMonthlyOutput");
+    var warrantyTotalAnnuallyOutput = document.getElementById("warrantyTotalAnnuallyOutput");
+
+    // check if the checkbox is checked and reset the range to 0 and reset the montlhy and annually to 0
+    function checkWarranties() {
+      if (document.getElementById("chkWarranties").checked == false) {
+        document.getElementById("myRange").disabled = true;
+        document.getElementById("myRange").value = 0;
+        document.getElementById("demo").textContent = 0;
+        warrantyMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        warrantyAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        warrantyTotalMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        warrantyTotalAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        myFunction();
+      }
+      else {
+        document.getElementById("myRange").disabled = false;
+      }
+    }
+
+    // check if the checkbox is checked and reset the range to 0 and reset the montlhy and annually to 0
+    function checkShortfall() {
+      if (document.getElementById("chkShortfall").checked == false) {
+        document.getElementById("shortfall").disabled = true;
+        document.getElementById("shortfall").value = 0;
+        document.getElementById("short").textContent = 0;
+        shortfallMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        shortfallAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        warrantyTotalMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        warrantyTotalAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        myFunction();
+      }
+      else {
+        document.getElementById("shortfall").disabled = false;
+      }
+    }
+
+    // check if the checkbox is checked and reset the range to 0 and reset the montlhy and annually to 0
+    function checkCredit() {
+      if (document.getElementById("chkCredit").checked == false) {
+        document.getElementById("life").disabled = true;
+        document.getElementById("life").value = 0;
+        document.getElementById("short1").textContent = 0;
+        LifeMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        LifeAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        warrantyTotalMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        warrantyTotalAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        myFunction();
+      }
+      else {
+        document.getElementById("life").disabled = false;
+      }
+    }
+
+    // check if the checkbox is checked and reset the range to 0 and reset the montlhy and annually to 0
+    function checkDents() {
+      if (document.getElementById("chkDents").checked == false) {
+        document.getElementById("dent").disabled = true;
+        document.getElementById("dent").value = 0;
+        document.getElementById("short2").textContent = 0;
+        dentsMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        dentsAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        warrantyTotalMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        warrantyTotalAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        myFunction();
+      }
+      else {
+        document.getElementById("dent").disabled = false;
+      }
+    }
+
+    // check if the checkbox is checked and reset the range to 0 and reset the montlhy and annually to 0
+    function checkvaps() {
+      if (document.getElementById("chkvaps").checked == false) {
+        document.getElementById("vaps").disabled = true;
+        document.getElementById("vaps").value = 0;
+        document.getElementById("short3").textContent = 0;
+        vapsMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        vapsAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        warrantyTotalMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        warrantyTotalAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        myFunction();
+      }
+      else {
+        document.getElementById("vaps").disabled = false;
+      }
+    }
+
+    // check if the checkbox is checked and reset the range to 0 and reset the montlhy and annually to 0
+    function checkTelesure() {
+      if (document.getElementById("chkTelesure").checked == false) {
+        document.getElementById("telesure").disabled = true;
+        document.getElementById("telesure").value = 0;
+        document.getElementById("short4").textContent = 0;
+        telesureMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        telesureAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        warrantyTotalMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        warrantyTotalAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        myFunction();
+      }
+      else {
+        document.getElementById("telesure").disabled = false;
+      }
+    }
+
+    var output = document.getElementById("demo");
+    var output1 = document.getElementById("short");
+    var output2 = document.getElementById("short1");
+    var output3 = document.getElementById("short2");
+    var output4 = document.getElementById("short3");
+    var output5 = document.getElementById("short4");
+
+    output.innerHTML = slider.value;
+    output1.innerHTML = slider1.value;
+    output2.innerHTML = slider2.value;
+    output3.innerHTML = slider3.value;
+    output4.innerHTML = slider4.value;
+    output5.innerHTML = slider5.value;
+
+    slider.oninput = function () {
+      output.innerHTML = this.value;
+    }
+
+    slider1.oninput = function () {
+      output1.innerHTML = this.value;
+    }
+
+    slider2.oninput = function () {
+      output2.innerHTML = this.value;
+    }
+
+    slider3.oninput = function () {
+      output3.innerHTML = this.value;
+    }
+
+    slider4.oninput = function () {
+      output4.innerHTML = this.value;
+    }
+
+    slider5.oninput = function () {
+      output5.innerHTML = this.value;
+    }
+
+    // Submit buttom to calculate
+    function myFunction() {
+      var carsOutput = document.getElementById('cars').value;
+      var valuesOutput = document.getElementById('values').value;
+      var kmOutput = document.getElementById('km').value;
+      var ageOutput = document.getElementById('age').value;
+      if (carsOutput == '') {
+        carsOutput = 0;
+      }
+      if (valuesOutput == '') {
+        valuesOutput = 0;
+      }
+      if (kmOutput == '') {
+        kmOutput = 0;
+      }
+      if (ageOutput == '') {
+        ageOutput = 0;
+      }
+
+      // check if the checkbox is true to add the calculation
+      if (document.getElementById("chkWarranties").checked == true) {
+        var criteria1Earning1 = 0;
+        var criteria1Earning2 = 0;
+        var criteria2Earning1 = 0;
+        var criteria2Earning2 = 0;
+        var criteria3Earning1 = 0;
+        var criteria3Earning2 = 0;
+        var criteria4Earning1 = 0;
+        var criteria4Earning2 = 0;
+        var criteria5Earning1 = 0;
+        var criteria5Earning2 = 0;
+        var criteria6Earning1 = 0;
+        var criteria6Earning2 = 0;
+        var criteria7Earning1 = 0;
+        var criteria7Earning2 = 0;
+        var criteria8Earning1 = 0;
+        var criteria8Earning2 = 0;
+        var total1 = 0;
+        if (kmOutput < 80000 && ageOutput <= 3) {
+
+          // km < 80000 && age <= 3
+          criteria8Earning1 = (parseFloat(2050.00) * parseFloat(0.50) * carsOutput).toFixed(2);
+          criteria8Earning2 = (parseFloat(2537.50) * parseFloat(0.50) * carsOutput).toFixed(2);
+          total1 = Number(criteria8Earning1) + Number(criteria8Earning2);
+          warrantyMonthlyOutput.innerHTML = total1.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+        else if (kmOutput < 150000 && ageOutput <= 5) {
+
+          // Criteria number 1 and option number 1
+          criteria1Earning1 = (parseFloat(3912.50) * parseFloat(0.0920195439739414) * carsOutput).toFixed(2);
+          criteria1Earning2 = (parseFloat(4725.00) * parseFloat(0.094391244870041) * carsOutput).toFixed(2);
+          criteria2Earning1 = (parseFloat(3462.50) * parseFloat(0.0822475570032573) * carsOutput).toFixed(2);
+          criteria2Earning2 = (parseFloat(4237.50) * parseFloat(0.0841313269493844) * carsOutput).toFixed(2);
+          criteria3Earning1 = (parseFloat(3137.50) * parseFloat(0.0741042345276873) * carsOutput).toFixed(2);
+          criteria3Earning2 = (parseFloat(3912.50) * parseFloat(0.0772913816689467) * carsOutput).toFixed(2);
+          criteria4Earning1 = (parseFloat(2812.50) * parseFloat(0.0659609120521173) * carsOutput).toFixed(2);
+          criteria4Earning2 = (parseFloat(3162.50) * parseFloat(0.0636114911080711) * carsOutput).toFixed(2);
+          criteria5Earning1 = (parseFloat(2800.00) * parseFloat(0.0651465798045603) * carsOutput).toFixed(2);
+          criteria5Earning2 = (parseFloat(3425.00) * parseFloat(0.06703146374829) * carsOutput).toFixed(2);
+          criteria6Earning1 = (parseFloat(2650.00) * parseFloat(0.0618892508143323) * carsOutput).toFixed(2);
+          criteria6Earning2 = (parseFloat(3000.00) * parseFloat(0.0601915184678523) * carsOutput).toFixed(2);
+          criteria7Earning1 = (parseFloat(2500.00) * parseFloat(0.0586319218241042) * carsOutput).toFixed(2);
+          criteria7Earning2 = (parseFloat(2675.00) * parseFloat(0.0533515731874145) * carsOutput).toFixed(2);
+          criteria8Earning1 = (parseFloat(2050.00) * parseFloat(0.000) * carsOutput).toFixed(2);
+          criteria8Earning2 = (parseFloat(2537.50) * parseFloat(0.000) * carsOutput).toFixed(2);
+          total1 = Number(criteria1Earning1) + Number(criteria1Earning2) + Number(criteria2Earning1) + Number(criteria2Earning2)
+            + Number(criteria3Earning1) + Number(criteria3Earning2) + Number(criteria4Earning1) + Number(criteria4Earning2)
+            + Number(criteria5Earning1) + Number(criteria5Earning2) + Number(criteria6Earning1) + Number(criteria6Earning2)
+            + Number(criteria7Earning1) + Number(criteria7Earning2) + Number(criteria8Earning1) + Number(criteria8Earning2);
+          console.log(total1);
+          warrantyMonthlyOutput.innerHTML = total1.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+        else if (kmOutput < 200000 &&  ageOutput < 11) {
+
+          // Criteria number 1 and option number 1
+          var cc = parseFloat(10100/50100) * parseFloat(0.50);          
+          criteria2Earning1Weight = parseFloat(10100/50100) * parseFloat(0.50);
+          criteria2Earning2Weight = parseFloat(12300/59300) * parseFloat(0.50);
+          criteria3Earning1Weight = parseFloat(9100/50100) * parseFloat(0.50);
+          criteria3Earning2Weight = parseFloat(11300/59300) * parseFloat(0.50);
+          criteria4Earning1Weight = parseFloat(8100/50100) * parseFloat(0.50);
+          criteria4Earning2Weight = parseFloat(9300/59300) * parseFloat(0.50);
+          criteria5Earning1Weight = parseFloat(8000/50100) * parseFloat(0.50);
+          criteria5Earning2Weight = parseFloat(9800/59300) * parseFloat(0.50);
+          criteria6Earning1Weight = parseFloat(7600/50100) * parseFloat(0.50);
+          criteria6Earning2Weight = parseFloat(8800/59300) * parseFloat(0.50);
+          criteria7Earning1Weight = parseFloat(7200/50100) * parseFloat(0.50);
+          criteria7Earning2Weight = parseFloat(7800/59300) * parseFloat(0.50);
+          console.log(criteria2Earning1Weight);
+          console.log(criteria2Earning2Weight);
+          console.log(criteria3Earning1Weight);
+          console.log(criteria3Earning2Weight);
+          console.log(criteria4Earning1Weight);
+          console.log(criteria4Earning2Weight);
+          console.log(criteria5Earning1Weight);
+          console.log(criteria5Earning2Weight);
+          console.log(criteria6Earning1Weight);
+          console.log(criteria6Earning2Weight);
+          console.log(criteria7Earning1Weight);
+          console.log(criteria7Earning2Weight);
+          criteria1Earning1 = (parseFloat(3912.50) * parseFloat(0.000) * carsOutput).toFixed(2);
+          criteria1Earning2 = (parseFloat(4725.00) * parseFloat(0.000) * carsOutput).toFixed(2);
+          criteria2Earning1 = (parseFloat(3462.50) * criteria2Earning1Weight * carsOutput).toFixed(2);
+          criteria2Earning2 = (parseFloat(4237.50) * criteria2Earning2Weight * carsOutput).toFixed(2);
+          criteria3Earning1 = (parseFloat(3137.50) * criteria3Earning1Weight * carsOutput).toFixed(2);
+          criteria3Earning2 = (parseFloat(3912.50) * criteria3Earning2Weight * carsOutput).toFixed(2);
+          criteria4Earning1 = (parseFloat(2812.50) * criteria4Earning1Weight * carsOutput).toFixed(2);
+          criteria4Earning2 = (parseFloat(3162.50) * criteria4Earning2Weight * carsOutput).toFixed(2);
+          criteria5Earning1 = (parseFloat(2800.00) * criteria5Earning1Weight * carsOutput).toFixed(2);
+          criteria5Earning2 = (parseFloat(3425.00) * criteria5Earning2Weight * carsOutput).toFixed(2);
+          criteria6Earning1 = (parseFloat(2650.00) * criteria6Earning1Weight * carsOutput).toFixed(2);
+          criteria6Earning2 = (parseFloat(3000.00) * criteria6Earning2Weight * carsOutput).toFixed(2);
+          criteria7Earning1 = (parseFloat(2500.00) * criteria7Earning1Weight * carsOutput).toFixed(2);
+          criteria7Earning2 = (parseFloat(2675.00) * criteria7Earning2Weight * carsOutput).toFixed(2);
+          criteria8Earning1 = (parseFloat(2050.00) * parseFloat(0.000) * carsOutput).toFixed(2);
+          criteria8Earning2 = (parseFloat(2537.50) * parseFloat(0.000) * carsOutput).toFixed(2);
+          total1 = Number(criteria1Earning1) + Number(criteria1Earning2) + Number(criteria2Earning1) + Number(criteria2Earning2)
+            + Number(criteria3Earning1) + Number(criteria3Earning2) + Number(criteria4Earning1) + Number(criteria4Earning2)
+            + Number(criteria5Earning1) + Number(criteria5Earning2) + Number(criteria6Earning1) + Number(criteria6Earning2)
+            + Number(criteria7Earning1) + Number(criteria7Earning2) + Number(criteria8Earning1) + Number(criteria8Earning2);
+          
+          warrantyMonthlyOutput.innerHTML = total1.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+        else if (kmOutput > 199999 || ageOutput > 10) {
+
+          // Criteria number 1 and option number 1
+          var cc = parseFloat(10100/50100) * parseFloat(0.50);          
+          criteria5Earning1Weight = parseFloat(8000/22800) * parseFloat(0.50);
+          criteria5Earning2Weight = parseFloat(9800/26400) * parseFloat(0.50);
+          criteria6Earning1Weight = parseFloat(7600/22800) * parseFloat(0.50);
+          criteria6Earning2Weight = parseFloat(8800/26400) * parseFloat(0.50);
+          criteria7Earning1Weight = parseFloat(7200/22800) * parseFloat(0.50);
+          criteria7Earning2Weight = parseFloat(7800/26400) * parseFloat(0.50);
+          console.log("amu", criteria5Earning1Weight);
+          console.log(criteria5Earning2Weight);
+          console.log(criteria6Earning1Weight);
+          console.log(criteria6Earning2Weight);
+          console.log(criteria7Earning1Weight);
+          console.log(criteria7Earning2Weight);
+          criteria1Earning1 = (parseFloat(3912.50) * parseFloat(0.000) * carsOutput).toFixed(2);
+          criteria1Earning2 = (parseFloat(4725.00) * parseFloat(0.000) * carsOutput).toFixed(2);
+          criteria2Earning1 = (parseFloat(3462.50) * parseFloat(0.000) * carsOutput).toFixed(2);
+          criteria2Earning2 = (parseFloat(4237.50) * parseFloat(0.000) * carsOutput).toFixed(2);
+          criteria3Earning1 = (parseFloat(3137.50) * parseFloat(0.000) * carsOutput).toFixed(2);
+          criteria3Earning2 = (parseFloat(3912.50) * parseFloat(0.000) * carsOutput).toFixed(2);
+          criteria4Earning1 = (parseFloat(2812.50) * parseFloat(0.000) * carsOutput).toFixed(2);
+          criteria4Earning2 = (parseFloat(3162.50) * parseFloat(0.000) * carsOutput).toFixed(2);
+          criteria5Earning1 = (parseFloat(2800.00) * criteria5Earning1Weight * carsOutput).toFixed(2);
+          criteria5Earning2 = (parseFloat(3425.00) * criteria5Earning2Weight * carsOutput).toFixed(2);
+          criteria6Earning1 = (parseFloat(2650.00) * criteria6Earning1Weight * carsOutput).toFixed(2);
+          criteria6Earning2 = (parseFloat(3000.00) * criteria6Earning2Weight * carsOutput).toFixed(2);
+          criteria7Earning1 = (parseFloat(2500.00) * criteria7Earning1Weight * carsOutput).toFixed(2);
+          criteria7Earning2 = (parseFloat(2675.00) * criteria7Earning2Weight * carsOutput).toFixed(2);
+          criteria8Earning1 = (parseFloat(2050.00) * parseFloat(0.000) * carsOutput).toFixed(2);
+          criteria8Earning2 = (parseFloat(2537.50) * parseFloat(0.000) * carsOutput).toFixed(2);
+          total1 = Number(criteria1Earning1) + Number(criteria1Earning2) + Number(criteria2Earning1) + Number(criteria2Earning2)
+            + Number(criteria3Earning1) + Number(criteria3Earning2) + Number(criteria4Earning1) + Number(criteria4Earning2)
+            + Number(criteria5Earning1) + Number(criteria5Earning2) + Number(criteria6Earning1) + Number(criteria6Earning2)
+            + Number(criteria7Earning1) + Number(criteria7Earning2) + Number(criteria8Earning1) + Number(criteria8Earning2);
+          
+          warrantyMonthlyOutput.innerHTML = total1.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+
+
+        //warrantyMonthlyOutput.innerHTML = (parseInt(carsOutput) + parseInt(valuesOutput) + parseInt(kmOutput) + parseInt(ageOutput) * parseInt(output.innerHTML/100)).toFixed(2);
+        //warrantyAnnuallyOutput.innerHTML = ((parseInt(carsOutput) + parseInt(valuesOutput) + parseInt(kmOutput) + parseInt(ageOutput) + parseInt(output.innerHTML)) * 12).toFixed(2);
+      }
+      else {
+        warrantyMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        warrantyAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+      }
+
+      // check if the checkbox is true to add the calculation
+      if (document.getElementById("chkShortfall").checked == true) {
+        shortfallMonthlyOutput.innerHTML = (parseInt(carsOutput) + parseInt(valuesOutput) + parseInt(kmOutput) + parseInt(ageOutput) + parseInt(output1.innerHTML)).toFixed(2);
+        shortfallAnnuallyOutput.innerHTML = ((parseInt(carsOutput) + parseInt(valuesOutput) + parseInt(kmOutput) + parseInt(ageOutput) + parseInt(output1.innerHTML)) * 12).toFixed(2);
+      }
+      else {
+        shortfallMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        shortfallAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+      }
+
+      // check if the checkbox is true to add the calculation
+      if (document.getElementById("chkCredit").checked == true) {
+        LifeMonthlyOutput.innerHTML = (parseInt(carsOutput) + parseInt(valuesOutput) + parseInt(kmOutput) + parseInt(ageOutput) + parseInt(output2.innerHTML)).toFixed(2);
+        LifeAnnuallyOutput.innerHTML = ((parseInt(carsOutput) + parseInt(valuesOutput) + parseInt(kmOutput) + parseInt(ageOutput) + parseInt(output2.innerHTML)) * 12).toFixed(2);
+      }
+      else {
+        LifeMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        LifeAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+      }
+
+      // check if the checkbox is true to add the calculation
+      if (document.getElementById("chkDents").checked == true) {
+        dentsMonthlyOutput.innerHTML = (parseInt(carsOutput) + parseInt(valuesOutput) + parseInt(kmOutput) + parseInt(ageOutput) + parseInt(output3.innerHTML)).toFixed(2);
+        dentsAnnuallyOutput.innerHTML = ((parseInt(carsOutput) + parseInt(valuesOutput) + parseInt(kmOutput) + parseInt(ageOutput) + parseInt(output3.innerHTML)) * 12).toFixed(2);
+      }
+      else {
+        dentsMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        dentsAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+      }
+
+      // check if the checkbox is true to add the calculation
+      if (document.getElementById("chkvaps").checked == true) {
+        vapsMonthlyOutput.innerHTML = (parseInt(carsOutput) + parseInt(valuesOutput) + parseInt(kmOutput) + parseInt(ageOutput) + parseInt(output4.innerHTML)).toFixed(2);
+        vapsAnnuallyOutput.innerHTML = ((parseInt(carsOutput) + parseInt(valuesOutput) + parseInt(kmOutput) + parseInt(ageOutput) + parseInt(output4.innerHTML)) * 12).toFixed(2);
+      }
+      else {
+        vapsMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        vapsAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+      }
+
+      // check if the checkbox is true to add the calculation
+      if (document.getElementById("chkTelesure").checked == true) {
+        telesureMonthlyOutput.innerHTML = (parseInt(carsOutput) + parseInt(valuesOutput) + parseInt(kmOutput) + parseInt(ageOutput) + parseInt(output5.innerHTML)).toFixed(2);
+        telesureAnnuallyOutput.innerHTML = ((parseInt(carsOutput) + parseInt(valuesOutput) + parseInt(kmOutput) + parseInt(ageOutput) + parseInt(output5.innerHTML)) * 12).toFixed(2);
+      }
+      else {
+        telesureMonthlyOutput.innerHTML = (parseInt(0)).toFixed(2);
+        telesureAnnuallyOutput.innerHTML = (parseInt(0)).toFixed(2);
+      }
+
+      warrantyTotalMonthlyOutput.innerHTML = (parseInt(warrantyMonthlyOutput.innerHTML) + parseInt(shortfallMonthlyOutput.innerHTML) + parseInt(LifeMonthlyOutput.innerHTML) + parseInt(dentsMonthlyOutput.innerHTML) + parseInt(vapsMonthlyOutput.innerHTML) + parseInt(telesureMonthlyOutput.innerHTML)).toFixed(2);
+      warrantyTotalAnnuallyOutput.innerHTML = (parseInt(warrantyAnnuallyOutput.innerHTML) + parseInt(shortfallAnnuallyOutput.innerHTML) + parseInt(LifeAnnuallyOutput.innerHTML) + parseInt(dentsAnnuallyOutput.innerHTML) + parseInt(vapsAnnuallyOutput.innerHTML) + parseInt(telesureAnnuallyOutput.innerHTML)).toFixed(2);
+    }
+
+  </script>
+</body>
+
+</html>
